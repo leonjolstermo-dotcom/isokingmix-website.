@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IsoKingMix - Startsida</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+        
+        /* Video bakgrund */
+        #bg-video {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translateX(-50%) translateY(-50%);
+            z-index: -1;
+        }
+        
+        /* Aktivera ljud-knapp */
+        .audio-permission {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 10px;
+            text-align: center;
+            z-index: 1000;
+            border: 2px solid #ff6b00;
+        }
+        
+        .audio-btn {
+            background: linear-gradient(45deg, #ff6b00, #ff8c00);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        
+        .audio-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Volymkontroll */
+        .volume-control {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 15px;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .volume-slider {
+            width: 80px;
+            height: 5px;
+            -webkit-appearance: none;
+            background: #666;
+            border-radius: 5px;
+            outline: none;
+        }
+        
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #ff6b00;
+            cursor: pointer;
+        }
+        
+        .volume-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+        }
+        
+        /* Navigationslänk */
+        .contact-link {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 10px 20px;
+            border: 2px solid white;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+        
+        .contact-link:hover {
+            background: white;
+            color: black;
+        }
+        
+        /* Instagram-knapp */
+        .instagram-link {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 10px 20px;
+            border: 2px solid white;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            z-index: 100;
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+        }
+        
+        .instagram-link:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Huvudinnehåll */
+        .main-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+        
+        .main-title {
+            font-size: 5em;
+            font-weight: bold;
+            color: #ff6b00;
+            margin: 0;
+        }
+        
+        .subtitle {
+            font-size: 1.5em;
+            margin-top: 10px;
+        }
+        
+        /* Göm volymkontrollen tills ljud är aktiverat */
+        .volume-control {
+            display: none;
+        }
+
+        /* Footer-text */
+        .footer-note {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 0.9em;
+            opacity: 0.85;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+            background: rgba(0, 0, 0, 0.4);
+            padding: 5px 12px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Video bakgrund från lokal fil -->
+    <video muted loop id="bg-video">
+       <source src="static/bg-video.mp4" type="video/mp4">
+    </video>
+    
+    <!-- Aktivera ljud-knapp -->
+    <div class="audio-permission" id="audioPermission">
+        <h3>Klicka för att aktivera ljud</h3>
+        <button class="audio-btn" onclick="enableAudio()">🎵 Aktivera Ljud</button>
+    </div>
+    
+    <!-- Volymkontroll (dold tills den behövs) -->
+    <div class="volume-control" id="volumeControl">
+        <button class="volume-btn" id="volumeBtn" onclick="toggleMute()">🔇</button>
+        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.1" value="0.5" oninput="changeVolume(this.value)">
+    </div>
+    
+<!-- Instagram-knapp -->
+<a href="https://www.instagram.com/isokingmix/" class="instagram-link" target="_blank">📸 Instagram</a>
+
+    
+    <!-- Contact me länk -->
+    <a href="contact.html" class="contact-link">Contact me</a>
+ 
+    <!-- Huvudinnehåll -->
+    <div class="main-content">
+        <h1 class="main-title">IsoKingMix</h1>
+        <p class="subtitle">Basketball Mix Tapes</p>
+    </div>
+
+    <!-- Footer text -->
+    <div class="footer-note">
+        OBS: Videon är inte min
+    </div>
+
+    <script>
+        const video = document.getElementById('bg-video');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const volumeBtn = document.getElementById('volumeBtn');
+        const volumeControl = document.getElementById('volumeControl');
+        const audioPermission = document.getElementById('audioPermission');
+        let isMuted = true;
+        
+        // Starta videon (muted från början)
+        document.addEventListener('DOMContentLoaded', function() {
+            video.play().catch(function(error) {
+                console.log('Video playback error: ', error);
+            });
+        });
+        
+        // Aktivera ljud när användaren klickar
+        function enableAudio() {
+            video.muted = false;
+            video.volume = 0.5;
+            isMuted = false;
+            volumeControl.style.display = 'flex';
+            audioPermission.style.display = 'none';
+            updateVolumeButton();
+        }
+        
+        // Ändra volym
+        function changeVolume(volume) {
+            video.volume = volume;
+            isMuted = (volume == 0);
+            updateVolumeButton();
+        }
+        
+        // Mute/Unmute
+        function toggleMute() {
+            isMuted = !isMuted;
+            if (isMuted) {
+                video.volume = 0;
+                volumeSlider.value = 0;
+            } else {
+                video.volume = volumeSlider.value;
+            }
+            updateVolumeButton();
+        }
+        
+        // Uppdatera volymknappens ikon
+        function updateVolumeButton() {
+            if (video.volume == 0 || isMuted) {
+                volumeBtn.textContent = '🔇';
+            } else if (video.volume < 0.5) {
+                volumeBtn.textContent = '🔈';
+            } else {
+                volumeBtn.textContent = '🔊';
+            }
+        }
+    </script>
+</body>
+</html>
