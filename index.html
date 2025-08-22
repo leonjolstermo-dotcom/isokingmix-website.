@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IsoKingMix - Startsida</title>
@@ -16,14 +15,17 @@
         
         /* Video bakgrund */
         #bg-video {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Gör att videon fyller hela skärmen */
-  z-index: -1;
-}
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translateX(-50%) translateY(-50%);
+            z-index: -1;
+        }
+        
         /* Aktivera ljud-knapp */
         .audio-permission {
             position: fixed;
@@ -188,7 +190,8 @@
 <body>
     <!-- Video bakgrund från lokal fil -->
     <video muted loop id="bg-video">
-       <source src="static/bg-video.mp4" type="video/mp4">
+        <source src="static/bg-video.mp4" type="video/mp4">
+
     </video>
     
     <!-- Aktivera ljud-knapp -->
@@ -209,7 +212,8 @@
     
     <!-- Contact me länk -->
     <a href="contact.html" class="contact-link">Contact me</a>
- 
+
+    
     <!-- Huvudinnehåll -->
     <div class="main-content">
         <h1 class="main-title">IsoKingMix</h1>
