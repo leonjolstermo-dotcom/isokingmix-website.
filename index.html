@@ -14,20 +14,15 @@
         }
         
         /* Video bakgrund */
-        #bg-video {
+       #bg-video {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  width: auto;
-  height: 100%;
-  min-width: 100%;
-  min-height: 100%;
-  transform: translate(-50%, -50%);
-  object-fit: contain; /* istället för cover */
-  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100vw;   /* alltid lika bred som skärmen */
+  height: 100vh;  /* alltid lika hög som skärmen */
+  object-fit: cover; /* fyller hela rutan */
+  z-index: -1;    /* så att text/knappar ligger ovanpå */
 }
-
-        
         /* Aktivera ljud-knapp */
         .audio-permission {
             position: fixed;
