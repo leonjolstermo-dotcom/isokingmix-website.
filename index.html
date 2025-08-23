@@ -18,11 +18,13 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;   /* alltid lika bred som skärmen */
-  height: 100vh;  /* alltid lika hög som skärmen */
-  object-fit: cover; /* fyller hela rutan */
-  z-index: -1;    /* så att text/knappar ligger ovanpå */
+  width: 100vw;   /* fyller hela bredden */
+  height: 100vh;  /* fyller hela höjden */
+  object-fit: cover; /* zoomar in om proportioner inte stämmer */
+  z-index: -1;
+  background: black; /* om något skulle lämna luckor */
 }
+
         /* Aktivera ljud-knapp */
         .audio-permission {
             position: fixed;
